@@ -12,7 +12,6 @@ int main() {
     }
     cout<<endl<<"Now const array:" <<endl <<endl;
     const Array<int,5> arr2;
-    i=0;
     for(Array<int,5>::const_iterator it = arr2.begin(); it!=arr2.end();it++){
         cout<<*it<<endl;
     }

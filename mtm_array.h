@@ -116,15 +116,14 @@ public:
 //                        Const Iterator                                 //
 //-----------------------------------------------------------------------//
     class const_iterator {
-        Array<T,SIZE>* const array;
+        const Array<T,SIZE>* const array;
         int index;
 
-        /** Constructor */
-        const_iterator(Array<T,SIZE>* const array, int index = 0):
-                array(array),index(index){};
-        friend class Array;
-
     public:
+
+        /** Constructor */
+        const_iterator(const Array<T,SIZE>* const array, int index = 0):
+                array(array),index(index){};
 
         /** Operator* */
         const T& operator*() const {
