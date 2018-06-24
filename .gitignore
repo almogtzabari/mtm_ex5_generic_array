@@ -25,3 +25,5 @@ cmake-build-debug/Makefile
 cmake-build-debug/mtm_ex5_generic_array
 *.cbp
 *.h___jb_tmp___
+cmake-build-debug/CMakeFiles/Progress/count.txt
+cmake-build-debug/CMakeFiles/Progress/1

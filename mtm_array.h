@@ -11,13 +11,13 @@ class Array
     int size;
 public:
     /** Constructor */
-    explicit Array():size(SIZE),data(new T[SIZE]){}; // todo: throw exception if needed.
+    explicit Array():size(SIZE),data(new T[SIZE]){};
 
     /** Copy constructor */
     Array(const Array& copy_from){
         size = copy_from.size;
         for(int i=0;i<size;i++){
-            data[i] = copy_from.data[i]; // Requires operator= for <T>.
+            data[i] = copy_from.data[i];
         }
     }
 
@@ -62,36 +62,35 @@ public:
 //                              Iterator                                 //
 //-----------------------------------------------------------------------//
     class iterator {
-        T* ptr;
+        Array<T,SIZE>* array;
+        int index;
 
         /** Constructor */
-        iterator(T* address): ptr(address){};
-
+        iterator(Array<T,SIZE>* array, int index = 0): array(array),index(index){};
         friend class Array<T,SIZE>;
 
     public:
 
         /** Operator* */
         T& operator*() const {
-            return *ptr;
+            return (*array)[index];
         }
 
         /** Operator++ */
         iterator operator++(int){
-            iterator it = *this;
-            ptr++;
-            return it;
+            index++;
+            return iterator(array,index-1);
         }
 
         /** ++Operator */
-        iterator& operator++(){
-            ptr++;
+        iterator& operator++() {
+            index++;
             return *this;
         }
 
         /** Operator== */
         bool operator==(const iterator& it) const{
-            return ptr == it.ptr;
+            return array == it.array && index == it.index;
         }
 
         /** Operator!= */
@@ -101,16 +100,16 @@ public:
 
         /** Operator-> */
         T& operator->(){
-            return ptr;
+            return &((*array)[index]);
         }
     };
 
     iterator begin(){
-        return iterator(&data[0]);
+        return iterator(this);
     }
 
     iterator end(){
-        return iterator(&data[size]);
+        return iterator(this,size);
     }
 
 //-----------------------------------------------------------------------//
@@ -136,11 +135,11 @@ public:
             const_iterator it = *this;
             ptr++;
             return it;
-
         }
 
         /** ++Operator */
         const_iterator& operator++(){
+            if(ptr == )
             ptr++;
             return *this;
         }
