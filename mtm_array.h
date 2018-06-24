@@ -27,14 +27,17 @@ public:
     }
 
     /** Operator= */
+    // todo: allocate data and all that stuff...
     Array& operator=(const Array& array){
         if(this == &array){
             /* Self assignment. */
             return *this;
         }
+        T* temp_data = new T[size];
+
         delete[] data;
         size = array.size;
-        data = new T[size];
+
         for(int i=0; i<size; i++){
             data[i] = array.data[i]; // Requires operator= for <T>.
         }
@@ -65,33 +68,38 @@ public:
 //                              Iterator                                 //
 //-----------------------------------------------------------------------//
     class iterator {
-        T* address;
+        T* ptr;
     public:
         /** Constructor */
-        iterator(T* address):address(address){};
+        iterator(T* address): ptr(address){};
 
         /** Operator* */
-        T& operator*() const;
+        T& operator*() const {
+            return *ptr;
+        }
+
+        /** Operator++ */
+        iterator operator++(int){
+            iterator it = *this;
+            ptr++;
+            return it;
+        }
+
+        /** ++Operator */
+        iterator& operator++(){
+            ptr++;
+            return *this;
+        }
     };
 
     iterator begin(){
-        return &data[0];
+        return iterator(&data[0]);
     }
 
     iterator end(){
-        return &data[size-1];
+        return iterator(&data[size-1]);
     }
 
-    iterator operator++(iterator& it){
-        if(it==end()){
-            return end();
-        }
-        for(int i=0;i<size;i++){
-            if(&data[i]==it){
-                break;
-            }
-        }
-    }
 //-----------------------------------------------------------------------//
 //                        Const Iterator                                 //
 //-----------------------------------------------------------------------//
