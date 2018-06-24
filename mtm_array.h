@@ -66,7 +66,7 @@ public:
         int index;
 
         /** Constructor */
-        iterator(Array<T,SIZE>* array, int index = 0): array(array),index(index){};
+        iterator(Array<T,SIZE>* const array, const int index = 0): array(array),index(index){};
         friend class Array<T,SIZE>;
 
     public:
@@ -99,7 +99,7 @@ public:
         }
 
         /** Operator-> */
-        T& operator->(){
+        T& operator->() const{
             return &((*array)[index]);
         }
     };
@@ -120,7 +120,7 @@ public:
         int index;
 
         /** Constructor */
-        const_iterator(const Array<T,SIZE>* const array, int index = 0):
+        const_iterator(const Array<T,SIZE>* const array, const int index = 0):
                 array(array),index(index){};
 
         friend class Array<T,SIZE>;
@@ -155,7 +155,7 @@ public:
         }
 
         /** Operator-> */
-        const T& operator->(){
+        const T& operator->() const{
             return &((*array)[index]);
         }
     };
