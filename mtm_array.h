@@ -67,7 +67,7 @@ public:
 
         /** Constructor */
         iterator(Array<T,SIZE>* array, int index = 0): array(array),index(index){};
-        friend class Array;
+        friend class Array<T,SIZE>;
 
     public:
 
@@ -119,11 +119,13 @@ public:
         const Array<T,SIZE>* const array;
         int index;
 
-    public:
-
         /** Constructor */
         const_iterator(const Array<T,SIZE>* const array, int index = 0):
                 array(array),index(index){};
+
+        friend class Array<T,SIZE>;
+
+    public:
 
         /** Operator* */
         const T& operator*() const {
