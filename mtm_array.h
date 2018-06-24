@@ -165,7 +165,7 @@ public:
         return &data[0];
     }
     const_iterator end() const{
-        return &data[size-1];
+        return &data[size];
     }
 };
 
