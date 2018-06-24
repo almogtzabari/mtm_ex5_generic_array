@@ -62,12 +62,12 @@ public:
 //                              Iterator                                 //
 //-----------------------------------------------------------------------//
     class iterator {
-        Array<T,SIZE>* array;
+        Array<T,SIZE>* const array;
         int index;
 
         /** Constructor */
         iterator(Array<T,SIZE>* array, int index = 0): array(array),index(index){};
-        friend class Array<T,SIZE>;
+        friend class Array;
 
     public:
 
@@ -116,37 +116,36 @@ public:
 //                        Const Iterator                                 //
 //-----------------------------------------------------------------------//
     class const_iterator {
-        T* ptr;
+        Array<T,SIZE>* const array;
+        int index;
 
         /** Constructor */
-        const_iterator(T* address): ptr(address){};
-
-        friend class Array<T,SIZE>;
+        const_iterator(Array<T,SIZE>* const array, int index = 0):
+                array(array),index(index){};
+        friend class Array;
 
     public:
 
         /** Operator* */
-        T const& operator*() const{
-            return *ptr;
+        const T& operator*() const {
+            return (*array)[index];
         }
 
         /** Operator++ */
         const_iterator operator++(int){
-            const_iterator it = *this;
-            ptr++;
-            return it;
+            index++;
+            return const_iterator(array,index-1);
         }
 
         /** ++Operator */
-        const_iterator& operator++(){
-            if(ptr == )
-            ptr++;
+        const_iterator& operator++() {
+            index++;
             return *this;
         }
 
         /** Operator== */
         bool operator==(const const_iterator& it) const{
-            return ptr == it.ptr;
+            return array == it.array && index == it.index;
         }
 
         /** Operator!= */
@@ -156,15 +155,16 @@ public:
 
         /** Operator-> */
         const T& operator->(){
-            return ptr;
+            return &((*array)[index]);
         }
     };
 
     const_iterator begin() const{
-        return &data[0];
+        return const_iterator(this);
     }
+
     const_iterator end() const{
-        return &data[size];
+        return const_iterator(this,size);
     }
 };
 
