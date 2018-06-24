@@ -27,17 +27,11 @@ public:
     }
 
     /** Operator= */
-    // todo: allocate data and all that stuff...
     Array& operator=(const Array& array){
-        if(this == &array){
-            /* Self assignment. */
-            return *this;
-        }
-        T* temp_data = new T[size];
-
+        T* temp_data = new T[array.size];
         delete[] data;
+        data = temp_data;
         size = array.size;
-
         for(int i=0; i<size; i++){
             data[i] = array.data[i]; // Requires operator= for <T>.
         }
@@ -69,9 +63,13 @@ public:
 //-----------------------------------------------------------------------//
     class iterator {
         T* ptr;
-    public:
+
         /** Constructor */
         iterator(T* address): ptr(address){};
+
+        friend class Array<T,SIZE>;
+
+    public:
 
         /** Operator* */
         T& operator*() const {
@@ -90,6 +88,21 @@ public:
             ptr++;
             return *this;
         }
+
+        /** Operator== */
+        bool operator==(const iterator& it) const{
+            return ptr == it.ptr;
+        }
+
+        /** Operator!= */
+        bool operator!=(const iterator& it) const{
+            return !(this->operator==(it));
+        }
+
+        /** Operator-> */
+        T& operator->(){
+            return ptr;
+        }
     };
 
     iterator begin(){
@@ -97,15 +110,55 @@ public:
     }
 
     iterator end(){
-        return iterator(&data[size-1]);
+        return iterator(&data[size]);
     }
 
 //-----------------------------------------------------------------------//
 //                        Const Iterator                                 //
 //-----------------------------------------------------------------------//
     class const_iterator {
+        T* ptr;
+
+        /** Constructor */
+        const_iterator(T* address): ptr(address){};
+
+        friend class Array<T,SIZE>;
+
     public:
-        T const& operator*() const;
+
+        /** Operator* */
+        T const& operator*() const{
+            return *ptr;
+        }
+
+        /** Operator++ */
+        const_iterator operator++(int){
+            const_iterator it = *this;
+            ptr++;
+            return it;
+
+        }
+
+        /** ++Operator */
+        const_iterator& operator++(){
+            ptr++;
+            return *this;
+        }
+
+        /** Operator== */
+        bool operator==(const const_iterator& it) const{
+            return ptr == it.ptr;
+        }
+
+        /** Operator!= */
+        bool operator!=(const const_iterator& it) const{
+            return !(this->operator==(it));
+        }
+
+        /** Operator-> */
+        const T& operator->(){
+            return ptr;
+        }
     };
 
     const_iterator begin() const{

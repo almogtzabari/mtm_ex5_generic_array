@@ -24,3 +24,4 @@ cmake-build-debug/CMakeFiles/TargetDirectories.txt
 cmake-build-debug/Makefile
 cmake-build-debug/mtm_ex5_generic_array
 *.cbp
+*.h___jb_tmp___

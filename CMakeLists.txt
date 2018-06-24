@@ -3,4 +3,4 @@ project(mtm_ex5_generic_array)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(mtm_ex5_generic_array mtm_array.h mtm_array.cpp main.cpp)
+add_executable(mtm_ex5_generic_array mtm_array.h main.cpp)
