@@ -21,6 +21,11 @@ public:
         }
     }
 
+    /** Destructor */
+    ~Array(){
+        delete[] data;
+    }
+
     /** Operator= */
     Array& operator=(const Array& array){
         if(this == &array){
@@ -53,26 +58,54 @@ public:
     }
 
 
-    // TODO: Need to complete interface of iterator classes (x++,++x, ->, operator==, operator!=), as well
-    // as that of array itself (operator [], operator [] const, ctor, copy ctor, dtor, operator=),
-    // and implement everything.
-
+// TODO: Need to complete interface of iterator classes (x++,++x, ->, operator==, operator!=), as well
+// as that of array itself (operator [], operator [] const, ctor, copy ctor, dtor, operator=),
+// and implement everything.
+//-----------------------------------------------------------------------//
+//                              Iterator                                 //
+//-----------------------------------------------------------------------//
     class iterator {
+        T* address;
     public:
+        /** Constructor */
+        iterator(T* address):address(address){};
+
+        /** Operator* */
         T& operator*() const;
     };
 
+    iterator begin(){
+        return &data[0];
+    }
+
+    iterator end(){
+        return &data[size-1];
+    }
+
+    iterator operator++(iterator& it){
+        if(it==end()){
+            return end();
+        }
+        for(int i=0;i<size;i++){
+            if(&data[i]==it){
+                break;
+            }
+        }
+    }
+//-----------------------------------------------------------------------//
+//                        Const Iterator                                 //
+//-----------------------------------------------------------------------//
     class const_iterator {
     public:
         T const& operator*() const;
     };
 
-    iterator begin(){
-        return data;
+    const_iterator begin() const{
+        return &data[0];
     }
-    const_iterator begin() const;
-    iterator end();
-    const_iterator end() const;
+    const_iterator end() const{
+        return &data[size-1];
+    }
 };
 
 
