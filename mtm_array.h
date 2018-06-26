@@ -11,7 +11,7 @@ class Array
     int size;
 public:
     /** Constructor */
-    explicit Array():size(SIZE),data(new T[SIZE]){};
+    explicit Array():data(new T[SIZE]),size(SIZE){};
 
     /** Copy constructor */
     Array(const Array& copy_from){
