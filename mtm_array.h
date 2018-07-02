@@ -126,7 +126,7 @@ public:
         int index;
 
         /** Constructor */
-        const_iterator(const Array<T,SIZE>* const array, const int index = 0):
+        explicit const_iterator(const Array<T,SIZE>* const array, const int index = 0):
                 array(array),index(index){}
 
         friend class Array<T,SIZE>;
