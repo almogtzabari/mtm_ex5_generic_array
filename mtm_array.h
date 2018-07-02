@@ -15,7 +15,7 @@ public:
 
     /** Constructor */
     /** Creates a new array and initializing all cells to 'num'. */
-    explicit Array(T t):data(new T[SIZE]),size(SIZE){
+    explicit Array(const T& t):data(new T[SIZE]),size(SIZE){
         for(int i=0;i<size;i++){
             data[i] = t;
         }
