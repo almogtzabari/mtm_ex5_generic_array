@@ -30,3 +30,6 @@ cmake-build-debug/CMakeFiles/Progress/1
 *.exe
 cmake-build-debug/CMakeFiles/3.10.3/CompilerIdC/CMakeCCompilerId.c
 cmake-build-debug/CMakeFiles/3.10.3/CompilerIdCXX/CMakeCXXCompilerId.cpp
+*.rsp
+*.a
+*.obj

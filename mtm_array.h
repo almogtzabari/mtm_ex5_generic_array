@@ -9,6 +9,8 @@ class Array
 {
     T* data;
     int size;
+    static_assert(SIZE>0);
+    
 public:
     /** Constructor */
     explicit Array():data(new T[SIZE]),size(SIZE){}
