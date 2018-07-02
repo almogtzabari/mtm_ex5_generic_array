@@ -11,7 +11,15 @@ class Array
     int size;
 public:
     /** Constructor */
-    explicit Array():data(new T[SIZE]),size(SIZE){};
+    explicit Array():data(new T[SIZE]),size(SIZE){}
+
+    /** Constructor */
+    /** Creates a new array and initializing all cells to 'num'. */
+    explicit Array(T t):data(new T[SIZE]),size(SIZE){
+        for(int i=0;i<size;i++){
+            data[i] = t;
+        }
+    }
 
     /** Copy constructor */
     Array(const Array& copy_from){
@@ -33,7 +41,7 @@ public:
         data = temp_data;
         size = array.size;
         for(int i=0; i<size; i++){
-            data[i] = array.data[i]; // Requires operator= for <T>.
+            data[i] = array.data[i];
         }
         return *this;
     }
@@ -55,9 +63,6 @@ public:
     }
 
 
-// TODO: Need to complete interface of iterator classes (x++,++x, ->, operator==, operator!=), as well
-// as that of array itself (operator [], operator [] const, ctor, copy ctor, dtor, operator=),
-// and implement everything.
 //-----------------------------------------------------------------------//
 //                              Iterator                                 //
 //-----------------------------------------------------------------------//
@@ -66,7 +71,8 @@ public:
         int index;
 
         /** Constructor */
-        iterator(Array<T,SIZE>* const array, const int index = 0): array(array),index(index){};
+        explicit iterator(Array<T,SIZE>* const array, const int index = 0):
+                array(array),index(index){}
         friend class Array<T,SIZE>;
 
     public:
@@ -121,7 +127,7 @@ public:
 
         /** Constructor */
         const_iterator(const Array<T,SIZE>* const array, const int index = 0):
-                array(array),index(index){};
+                array(array),index(index){}
 
         friend class Array<T,SIZE>;
 
