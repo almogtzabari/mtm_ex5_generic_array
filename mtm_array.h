@@ -105,7 +105,7 @@ public:
         }
 
         /** Operator-> */
-        T& operator->() const{
+        T* operator->() const{
             return &((*array)[index]);
         }
     };
@@ -161,7 +161,7 @@ public:
         }
 
         /** Operator-> */
-        const T& operator->() const{
+        const T* operator->() const{
             return &((*array)[index]);
         }
     };
